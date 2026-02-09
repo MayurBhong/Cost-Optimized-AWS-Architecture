@@ -1,23 +1,29 @@
-AMI
-A custom AMI is created from a pre configured EC2 instance running the web server. The AMI ensures consistent and repeatable instance launches.
+Launch Template and Auto Scaling Overview
 
-Instance Type
-t2.micro or t3.micro is selected to remain within AWS Free Tier limits and minimize cost.
+This section explains how the Launch Template and Auto Scaling Group are configured to demonstrate scalability concepts while keeping infrastructure cost under control.
 
-Networking
-Instances are launched inside the custom VPC public subnet. Public IP assignment is enabled to allow internet access.
+AMI Strategy
+A custom Amazon Machine Image is created from a fully configured EC2 instance running the web server. This AMI captures the operating system, installed packages, and application configuration. Using a custom AMI ensures consistent, repeatable instance launches and significantly reduces setup time during recovery or replacement.
 
-Storage
-The default EBS root volume is used. No additional volumes are attached to avoid extra charges.
+Instance Type Selection
+The t2.micro or t3.micro instance type is selected to remain within AWS Free Tier limits. These instance types provide sufficient performance for learning purposes while minimizing compute cost.
 
-Auto Scaling Configuration
-Minimum capacity is set to one.
-Maximum capacity is set to one.
-Desired capacity is set to one.
+Networking Configuration
+Instances launched from the Launch Template are placed inside the custom VPC public subnet. Public IP assignment is enabled so instances can access the internet directly without requiring additional networking services. This approach avoids NAT Gateway usage and reduces cost.
+
+Storage Configuration
+The default EBS root volume is used for instance storage. No additional EBS volumes are attached. This keeps storage usage minimal and avoids extra charges while still providing sufficient space for the operating system and web server.
+
+Auto Scaling Group Configuration
+The Auto Scaling Group is configured with strict capacity limits.
+Minimum capacity is set to one to ensure availability.
+Maximum capacity is set to one to prevent scaling out.
+Desired capacity is set to one to maintain a single running instance.
 
 Scaling Policies
-Scaling policies are configured for learning purposes only. Since maximum capacity is one, no additional instances are launched.
+Scaling policies are configured only for learning and demonstration purposes. Even if scaling thresholds are reached, no additional instances are launched because the maximum capacity is fixed at one. This allows understanding Auto Scaling behavior without increasing cost.
 
-Purpose
-Demonstrate Auto Scaling concepts while controlling cost.
-Ensure fast recovery using AMI based instance launches.
+Purpose and Learning Outcome
+Demonstrate how Auto Scaling Groups and Launch Templates work together.
+Practice designing scalable infrastructure within cost constraints.
+Ensure fast and reliable recovery using AMI based instance launches.
