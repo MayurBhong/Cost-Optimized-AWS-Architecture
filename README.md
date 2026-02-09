@@ -6,16 +6,18 @@ The goal is to learn scalability, availability, and cost control while designing
 
 The architecture is intentionally minimal but follows AWS best practices.
 
----
 
 ## AWS Services Used
 - Amazon EC2  
 - Amazon VPC  
 - Application Load Balancer  
 - Auto Scaling  
-- Amazon Machine Image  
+- Amazon Machine Image
 
----
+
+ ## Architecture Flow
+ ![MasterHead](https://github.com/user-attachments/assets/7d008a48-45b1-4c26-851a-0a2a07dc2742)
+
 
 ## Architecture Overview
 The architecture balances scalability and cost efficiency.
@@ -28,7 +30,6 @@ The architecture balances scalability and cost efficiency.
 - A custom AMI enables fast recovery and consistent deployments.
 
 
----
 
 ## Step by Step Implementation Process
 
@@ -69,7 +70,6 @@ The architecture balances scalability and cost efficiency.
 - Register the EC2 instance.
 - Enable health checks for monitoring.
 
----
 
 ## Cost Optimization Strategy
 - Use only Free Tier eligible EC2 instance types.
@@ -78,7 +78,6 @@ The architecture balances scalability and cost efficiency.
 - Use default storage configuration.
 - Stop or delete resources after testing.
 
----
 
 ## Scalability and Learning Outcomes
 - Load Balancer health checks demonstrate traffic routing.
@@ -86,14 +85,12 @@ The architecture balances scalability and cost efficiency.
 - AMI usage demonstrates fast recovery and standardized deployments.
 
 
----
 
 ## How to Use This Repository
 - Use `setup-ec2.sh` as EC2 User Data or run it manually to configure the web server.
 - Refer to `architecture.txt` for detailed architecture explanation.
 - Refer to `launch-template-notes.txt` for Auto Scaling and AMI configuration details.
 
----
 
 ## Outcome
 - Designed a scalable AWS architecture with strong cost control.
