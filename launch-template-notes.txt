@@ -1,0 +1,23 @@
+AMI
+A custom AMI is created from a pre configured EC2 instance running the web server. The AMI ensures consistent and repeatable instance launches.
+
+Instance Type
+t2.micro or t3.micro is selected to remain within AWS Free Tier limits and minimize cost.
+
+Networking
+Instances are launched inside the custom VPC public subnet. Public IP assignment is enabled to allow internet access.
+
+Storage
+The default EBS root volume is used. No additional volumes are attached to avoid extra charges.
+
+Auto Scaling Configuration
+Minimum capacity is set to one.
+Maximum capacity is set to one.
+Desired capacity is set to one.
+
+Scaling Policies
+Scaling policies are configured for learning purposes only. Since maximum capacity is one, no additional instances are launched.
+
+Purpose
+Demonstrate Auto Scaling concepts while controlling cost.
+Ensure fast recovery using AMI based instance launches.
