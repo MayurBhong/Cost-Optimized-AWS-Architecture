@@ -4,8 +4,6 @@
 This project demonstrates a cost optimized AWS cloud architecture built using Free Tier eligible services.  
 The goal is to learn scalability, availability, and cost control while designing a real world cloud setup.
 
-The architecture is intentionally minimal but follows AWS best practices.
-
 
 ## 🛠️ AWS Services Used
 - Amazon EC2  
