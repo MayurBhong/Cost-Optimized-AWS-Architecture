@@ -1,29 +1,39 @@
 Architecture Overview
 
-This project implements a cost optimized AWS cloud architecture designed to demonstrate scalability concepts while staying within Free Tier limits.
+This project demonstrates a cost optimized AWS cloud architecture built to understand scalability, high availability concepts, and cost control using Free Tier eligible services. The architecture is intentionally simple but follows real world cloud design principles.
 
-VPC
-A custom VPC is created with a single IPv4 CIDR block. One public subnet is configured inside the VPC. An Internet Gateway is attached to allow inbound and outbound internet access.
+VPC Design
+A custom Virtual Private Cloud is created with a dedicated IPv4 CIDR range. The VPC provides logical isolation for all AWS resources used in this project. Keeping a single VPC reduces complexity and avoids unnecessary networking cost.
 
-Subnet
-The public subnet hosts all resources. Auto assign public IP is enabled to allow EC2 internet access without additional networking services.
+Subnet Design
+One public subnet is created inside the VPC. All resources are placed in this subnet to eliminate the need for additional networking components such as NAT Gateway. Public IP assignment is enabled so EC2 instances can directly access the internet.
 
-EC2
-A single EC2 instance using t2.micro or t3.micro is launched inside the public subnet. The instance runs a basic Apache web server. The default EBS root volume is used for storage.
+Internet Gateway
+An Internet Gateway is attached to the VPC. This allows inbound HTTP traffic from users and outbound internet access for EC2 instance updates and package installation.
+
+EC2 Compute Layer
+A single EC2 instance is launched using t2.micro or t3.micro instance type to remain within Free Tier limits. The instance runs an Apache web server that serves a simple web page. The default EBS root volume is used for operating system and application storage to avoid extra storage costs.
 
 Application Load Balancer
-An Application Load Balancer is placed in front of the EC2 instance. It routes HTTP traffic to the target group. Health checks are enabled to monitor instance availability. The load balancer is used only for learning and short testing to avoid cost.
+An Application Load Balancer is placed in front of the EC2 instance. It handles incoming HTTP requests and forwards traffic to the target group. Health checks are enabled to monitor instance availability. The load balancer is created mainly to understand traffic routing and load balancing behavior and is deleted after testing to control cost.
 
-Auto Scaling
-An Auto Scaling Group is created using a Launch Template. Minimum capacity is set to one. Maximum capacity is set to one. Desired capacity is set to one. Scaling policies exist but no additional instances are launched.
+Auto Scaling Configuration
+An Auto Scaling Group is configured using a Launch Template. Minimum, maximum, and desired capacity are all set to one. This setup demonstrates Auto Scaling concepts such as health monitoring and instance replacement without launching additional instances that would increase cost.
 
-AMI
-A custom AMI is created from the configured EC2 instance. This AMI is used in the Launch Template to ensure consistent deployments and fast recovery.
+AMI Strategy
+A custom Amazon Machine Image is created from the configured EC2 instance. This AMI is used in the Launch Template to ensure consistent deployments and faster recovery in case the instance needs to be replaced. Using AMIs reduces manual configuration time and improves reliability.
 
-Security
-Security Groups allow inbound HTTP traffic on port 80. SSH access on port 22 is restricted to a specific IP address. Outbound traffic is allowed.
+Security Configuration
+Security Groups are configured to allow inbound HTTP traffic on port 80 from the internet. SSH access on port 22 is restricted to a specific IP address to reduce security risk. Outbound traffic is allowed to enable system updates and package downloads.
+
+Cost Optimization Approach
+Only Free Tier eligible services and instance types are used.
+Auto Scaling is restricted to a single instance.
+No NAT Gateway, additional subnets, or paid services are used.
+Resources are stopped or deleted immediately after learning objectives are met.
 
 Design Goals
-Learn AWS architecture fundamentals.
-Understand cost control techniques.
-Demonstrate scalability concepts without increasing resource usage.
+Understand core AWS architecture components.
+Learn how scalability works without increasing cost.
+Practice cost conscious cloud design decisions.
+Build a real world architecture suitable for beginner cloud and DevOps roles.
